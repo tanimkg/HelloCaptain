@@ -1,0 +1,274 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:stretchColumns="*"
+    tools:context="com.matrikatech.hellocaptain.StatActivity">
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+        <TextView
+            android:layout_span="2"
+            android:text="First Pilot Hours"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTotalHr1"
+            android:layout_gravity="center_horizontal"
+            android:text="00:00"
+            android:textStyle="bold" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+
+        <TextView
+            android:paddingLeft="20dp"
+            android:text="Day" />
+
+        <TextView
+            android:id="@+id/tvTotalHr1Day"
+            android:layout_gravity="center_horizontal"
+            android:text="00:00" />
+
+        <TextView android:text="" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+
+        <TextView
+            android:paddingLeft="20dp"
+            android:text="Night"
+            android:textColor="@color/night_red" />
+
+        <TextView
+            android:id="@+id/tvTotalHr1Night"
+            android:layout_gravity="center_horizontal"
+            android:text="00:00"
+            android:textColor="@color/night_red" />
+
+        <TextView android:text="" />
+
+    </TableRow>
+
+    <!--Second pilot-->
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+        <TextView
+            android:layout_span="2"
+            android:text="Second Pilot Hours"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTotalHr2"
+            android:layout_gravity="center_horizontal"
+            android:text="00:00"
+            android:textStyle="bold" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+
+        <TextView
+            android:paddingLeft="20dp"
+            android:text="Day" />
+
+        <TextView
+            android:id="@+id/tvTotalHr2Day"
+            android:layout_gravity="center_horizontal"
+            android:text="00:00" />
+
+        <TextView android:text="" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+
+        <TextView
+            android:paddingLeft="20dp"
+            android:text="Night"
+            android:textColor="@color/night_red" />
+
+        <TextView
+            android:id="@+id/tvTotalHr2Night"
+            android:layout_gravity="center_horizontal"
+            android:text="00:00"
+            android:textColor="@color/night_red" />
+
+        <TextView android:text="" />
+
+    </TableRow>
+
+
+    <!--Dual pilot-->
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+        <TextView
+            android:layout_span="2"
+            android:text="Dual Hours"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTotalHrDual"
+            android:layout_gravity="center_horizontal"
+            android:text="00:00"
+            android:textStyle="bold" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+
+        <TextView
+            android:paddingLeft="20dp"
+            android:text="Day" />
+
+        <TextView
+            android:id="@+id/tvTotalHrDualDay"
+            android:layout_gravity="center_horizontal"
+            android:text="00:00" />
+
+        <TextView android:text="" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+
+        <TextView
+            android:paddingLeft="20dp"
+            android:text="Night"
+            android:textColor="@color/night_red" />
+
+        <TextView
+            android:id="@+id/tvTotalHrDualNight"
+            android:layout_gravity="center_horizontal"
+            android:text="00:00"
+            android:textColor="@color/night_red" />
+
+        <TextView android:text="" />
+
+    </TableRow>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000"
+        />
+    <!--Total row-->
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/accent_material_dark"
+        android:padding="2dp">
+
+        <TextView
+            android:layout_span="2"
+            android:text="GRAND TOTAL"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvGrandTotal"
+            android:layout_gravity="center_horizontal"
+            android:text="00:00"
+            android:textStyle="bold" />
+
+    </TableRow>
+
+    <!--Cloud-->
+    <TableRow
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+        <TextView
+            android:layout_span="2"
+            android:text="Cloud / Instrument Flying"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:text=""
+            android:textStyle="bold" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+
+        <TextView
+            android:paddingLeft="20dp"
+            android:text="Actual Hour" />
+
+        <TextView android:text="" />
+
+        <TextView
+            android:id="@+id/tvTotalActHr"
+            android:layout_gravity="center_horizontal"
+            android:text="00:00" />
+
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+
+        <TextView
+            android:paddingLeft="20dp"
+            android:text="Simulated Hour" />
+
+        <TextView android:text="" />
+
+        <TextView
+            android:id="@+id/tvTotalSimHr"
+            android:layout_gravity="center_horizontal"
+            android:text="00:00" />
+
+
+    </TableRow>
+
+
+</TableLayout>

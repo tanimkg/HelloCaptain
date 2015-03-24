@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="3dp"
+    android:layout_marginTop="3dp"
+    android:orientation="horizontal"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvRowDtD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="DD"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#ff24018e" />
+
+        <TextView
+            android:id="@+id/tvRowDtM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Mmm"
+            android:textColor="#ff4111ff" />
+
+        <TextView
+            android:id="@+id/tvRowDtY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="YYYY"
+            android:textColor="#ff260aff" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight=".5"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvRowPilot1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilot First"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/tvRowPilot2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilot Second"
+            android:textSize="16sp"
+            android:textColor="#ff515151" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight=".3"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvRowHr1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilot First"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/tvRowHr2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilot Second"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tvRowHrDual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilot Second"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

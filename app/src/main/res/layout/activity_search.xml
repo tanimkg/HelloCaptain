@@ -1,0 +1,140 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.matrikatech.hellocaptain.SearchActivity">
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="15dp"
+            android:text="Search Records Where..."
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView17"
+            android:layout_marginBottom="20dp"
+            android:stretchColumns="1">
+
+            <TableRow>
+
+                <TextView android:text="First Pilot =" />
+
+                <AutoCompleteTextView android:id="@+id/etSearchFirstPilot" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="Second Pilot =" />
+
+                <AutoCompleteTextView android:id="@+id/etSearchSecondPilot" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="Aircraft =" />
+
+                <AutoCompleteTextView android:id="@+id/etSearchAc" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="From Date =" />
+
+                <EditText android:id="@+id/etSearchFromDt" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="To Date =" />
+
+                <EditText android:id="@+id/etSearchToDt" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="Mission =" />
+
+                <EditText android:id="@+id/etSearchMsn" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="" />
+
+                <CheckBox
+                    android:id="@+id/cbSearchIsNight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Night" />
+            </TableRow>
+
+
+            <TableRow>
+
+                <TextView android:text="" />
+
+                <LinearLayout android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cbSearchIsRotor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Rotor" />
+
+                    <CheckBox
+                        android:id="@+id/cbSearchIsMulti"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Multi-Engine" />
+
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="" />
+
+                <LinearLayout android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnReset"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reset" />
+
+                    <Button
+                        android:id="@+id/btnSearch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Search" />
+
+
+                </LinearLayout>
+            </TableRow>
+
+        </TableLayout>
+
+
+    </RelativeLayout>
+</ScrollView>

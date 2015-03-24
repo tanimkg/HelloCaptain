@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_listAllLogs"
+        android:orderInCategory="10"
+        android:title="All Logs"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_action_view_as_list"
+        />
+    <item
+        android:id="@+id/action_stat"
+        android:orderInCategory="5"
+        android:title="Statistics"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_action_network_cell"
+        />
+    <item
+        android:id="@+id/action_search"
+        android:orderInCategory="1"
+        android:title="Search"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_action_search"
+        />
+</menu>

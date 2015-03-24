@@ -1,0 +1,243 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.matrikatech.hellocaptain.SearchResultActivity">
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Hours As"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:text="1st Pilot"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:text="2nd Pilot"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:text="Dual"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <!--<TextView-->
+            <!--android:id="@+id/tvTotalHr1"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="00:00"-->
+            <!--android:textSize="12sp"-->
+            <!--android:textStyle="bold" />-->
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:paddingLeft="20dp"
+                android:text="Day"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvTotalHr1Day"
+                android:layout_gravity="center_horizontal"
+                android:text="00:00"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvTotalHr2Day"
+                android:layout_gravity="center_horizontal"
+                android:text="00:00"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvTotalHrDualDay"
+                android:layout_gravity="center_horizontal"
+                android:text="00:00"
+                android:textSize="12sp" />
+
+        </TableRow>
+        <!--Night Column-->
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:paddingLeft="20dp"
+                android:text="Night"
+                android:textColor="@color/night_red"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvTotalHr1Night"
+                android:layout_gravity="center_horizontal"
+                android:text="00:00"
+                android:textColor="@color/night_red"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvTotalHr2Night"
+                android:layout_gravity="center_horizontal"
+                android:text="00:00"
+                android:textColor="@color/night_red"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvTotalHrDualNight"
+                android:layout_gravity="center_horizontal"
+                android:text="00:00"
+                android:textColor="@color/night_red"
+                android:textSize="12sp" />
+
+        </TableRow>
+
+        <!--Total-->
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:paddingLeft="20dp"
+                android:text="Total"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTotalHr1"
+                android:layout_gravity="center_horizontal"
+                android:text="00:00"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTotalHr2"
+                android:layout_gravity="center_horizontal"
+                android:text="00:00"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTotalHrDual"
+                android:layout_gravity="center_horizontal"
+                android:text="00:00"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:stretchColumns="1">
+
+        <!--Cloud-->
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:text="Actual Hour"
+                android:textSize="10sp"
+                android:textStyle="italic" />
+
+
+            <TextView
+                android:id="@+id/tvTotalActHr"
+                android:layout_gravity="center_horizontal"
+                android:text="00:00"
+                android:textSize="10sp"
+                android:textStyle="italic" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:text="Simulated Hour"
+                android:textSize="10sp"
+                android:textStyle="italic" />
+
+
+            <TextView
+                android:id="@+id/tvTotalSimHr"
+                android:layout_gravity="center_horizontal"
+                android:text="00:00"
+                android:textSize="10sp"
+                android:textStyle="italic" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/accent_material_dark">
+
+            <TextView
+                android:text="GRAND TOTAL OF THIS SEARCH"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvGrandTotal"
+                android:layout_gravity="center_horizontal"
+                android:text="00:00"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </TableRow>
+    </TableLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:background="#000" />
+
+    <TextView
+        android:id="@+id/tvSearchResultFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Search Results" />
+
+    <ListView
+        android:id="@+id/lvSearchResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+</LinearLayout>
