@@ -160,6 +160,7 @@ public class SearchResultActivity extends ActionBarActivity implements AdapterVi
         Intent despatch = new Intent(this, RecordDetailsActivity.class);
         FlightLog dLog = logProvider.get(position);
 
+        despatch.putExtra("id", dLog.getId());
         despatch.putExtra("firstPilot", dLog.getFirstPilot().getName());
         despatch.putExtra("secondPilot", dLog.getSecondPilot().getName());
         despatch.putExtra("ac", dLog.getAc().getName());

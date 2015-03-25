@@ -34,5 +34,22 @@ public class HourCalculator {
         return hourInMinutes;
     }
 
-    public String getMinutesInHour() { return getH() + ":" + getM();}
+    public String getMinutesInHour() {
+        //TODO Format hh:mm correctly. Now 07:05 shows 7:5
+        String hhmm = "";
+        if (this.getH() < 10)
+        {
+            hhmm += "0" + this.getH();
+        } else {
+            hhmm += String.valueOf(this.getH());
+        }
+        hhmm += ":";
+        if (this.getM() < 10)
+        {
+            hhmm += "0" + this.getM();
+        } else {
+            hhmm += String.valueOf(this.getM());
+        }
+        return hhmm;
+    }
 }

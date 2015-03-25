@@ -1,5 +1,7 @@
 package com.matrikatech.hellocaptain.helpers;
 
+import java.text.SimpleDateFormat;
+
 /**
  * Created by TANIM on 23-Mar-15.
  *
@@ -22,11 +24,18 @@ public class WhereSQLBuilder {
     }
 
     public void setFromDt(String fromDt) {
+        //TODO Set logic: If toDt is set and fromDt is null then set fromDt minus 1 month from the toDt
         this.fromDt = fromDt;
     }
 
     public void setToDt(String toDt) {
-        this.toDt = toDt;
+        if ((fromDt != null) && (toDt == null))
+        {
+            SimpleDateFormat dt = new SimpleDateFormat("yyyy-M-dd");
+            this.toDt = dt.toString();
+        } else {
+            this.toDt = toDt;
+        }
     }
 
     public void setMsn(String msn) {

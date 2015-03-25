@@ -12,12 +12,21 @@ public class FlightLog {
     public final static int YES = 1;
     public final static int NO = 0;
 
+    public long id;
     private Pilot firstPilot, secondPilot, passenger;
     private Aircraft ac;
     private Date dt;
     private int hr1, hr2, hrDual, actHr, simHr;
     private boolean isNight;
     private String mission, route, description;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getDt() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd");

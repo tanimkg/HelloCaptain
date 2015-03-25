@@ -3,7 +3,10 @@ package com.matrikatech.hellocaptain;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.internal.widget.AdapterViewCompat;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -42,6 +45,9 @@ public class LogListActivity extends ActionBarActivity implements AdapterView.On
 
         //set listener
         lvLogs.setOnItemClickListener(this);
+
+        //register for long click context menu popup
+        registerForContextMenu(lvLogs);
     }
 
     private List<FlightLog> getData() {
@@ -83,6 +89,7 @@ public class LogListActivity extends ActionBarActivity implements AdapterView.On
         Intent despatch = new Intent(this, RecordDetailsActivity.class);
         FlightLog dLog = logProvider.get(position);
 
+        despatch.putExtra("id", dLog.getId());
         despatch.putExtra("firstPilot", dLog.getFirstPilot().getName());
         despatch.putExtra("secondPilot", dLog.getSecondPilot().getName());
         despatch.putExtra("ac", dLog.getAc().getName());
@@ -102,4 +109,39 @@ public class LogListActivity extends ActionBarActivity implements AdapterView.On
         startActivity(despatch);
     }
 
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+//        AdapterViewCompat.AdapterContextMenuInfo info = (AdapterViewCompat.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.editRecord:
+                editRecord(info.position);
+                return true;
+            case R.id.deleteRecord:
+                deleteRecord(info.position);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+    private void editRecord(int position) {
+        FlightLog dLog = logProvider.get(position);
+
+    }
+
+    private void deleteRecord(int position) {
+        FlightLog dLog = logProvider.get(position);
+
+        DatabaseHelper dbh = new DatabaseHelper(getApplicationContext());
+        dbh.deleteRecord(dLog);
+    }
 }

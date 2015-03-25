@@ -84,6 +84,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public HourCalculator getTotalHr1Day(WhereSQLBuilder where){
+        if (where != null) { where.setNight(false); }
         String query = "SELECT SUM(hr_1) AS total_hr1_day FROM " + MAIN_TABLE
                 + (where == null ? " WHERE night=0" : where.toString());
         SQLiteDatabase db = this.getReadableDatabase();
@@ -98,6 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public HourCalculator getTotalHr1Night(WhereSQLBuilder where){
+        if (where != null) { where.setNight(true); }
         String query = "SELECT SUM(hr_1) AS total_hr1_night FROM " + MAIN_TABLE
                 + (where == null ? " WHERE night=1" : where.toString())
                 ;
@@ -113,6 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public HourCalculator getTotalHr2Day(WhereSQLBuilder where){
+        if (where != null) { where.setNight(false); }
         String query = "SELECT SUM(hr_2) AS total_hr2_day FROM " + MAIN_TABLE
                 + (where == null ? " WHERE night=0 " : where.toString());
         SQLiteDatabase db = this.getReadableDatabase();
@@ -127,6 +130,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public HourCalculator getTotalHr2Night(WhereSQLBuilder where){
+        if (where != null) { where.setNight(true); }
         String query = "SELECT SUM(hr_2) AS total_hr2_night FROM " + MAIN_TABLE
                 + (where == null ? " WHERE night=1 " : where.toString());
         SQLiteDatabase db = this.getReadableDatabase();
@@ -141,6 +145,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public HourCalculator getTotalHrDualDay(WhereSQLBuilder where){
+        if (where != null) { where.setNight(false); }
         String query = "SELECT SUM(hr_dual) AS total_hrdual_day FROM " + MAIN_TABLE
                 + (where == null ? " WHERE night=0 ": where.toString());
         SQLiteDatabase db = this.getReadableDatabase();
@@ -155,6 +160,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public HourCalculator getTotalHrDualNight(WhereSQLBuilder where){
+        if (where != null) { where.setNight(true); }
         String query = "SELECT SUM(hr_dual) AS total_hrdual_night FROM " + MAIN_TABLE
                 + (where == null ? " WHERE night=1" : where.toString());
         SQLiteDatabase db = this.getReadableDatabase();
@@ -305,5 +311,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public void deleteRecord(FlightLog aRecord)
+    {
+        long id = aRecord.getId();
+        SQLiteDatabase db = super.getWritableDatabase();
+
+        //TODO Incomplete
+        db.delete(MAIN_TABLE, "id='"+id+"'", null);
+        db.close();
+    }
 
 }
