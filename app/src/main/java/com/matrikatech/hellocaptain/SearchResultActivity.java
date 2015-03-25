@@ -126,9 +126,9 @@ public class SearchResultActivity extends ActionBarActivity implements AdapterVi
         tvTotalActHr.setText(dbh.getTotalActHr(aWhere).getMinutesInHour());
         tvTotalSimHr.setText(dbh.getTotalSimHr(aWhere).getMinutesInHour());
 
-        int tempPlace = dbh.getTotalHr1Day(aWhere).getHourInMinutes() + dbh.getTotalHr1Night(aWhere).getHourInMinutes();
-        tempPlace += dbh.getTotalHr2Day(aWhere).getHourInMinutes() + dbh.getTotalHr2Night(aWhere).getHourInMinutes();
-        tempPlace += dbh.getTotalHrDualDay(aWhere).getHourInMinutes() + dbh.getTotalHrDualNight(aWhere).getHourInMinutes();
+        int tempPlace = dbh.getTotalHr1Day(aWhere).getHourInMinutes() + dbh.getTotalHr1Night(aWhere).getHourInMinutes()
+        + dbh.getTotalHr2Day(aWhere).getHourInMinutes() + dbh.getTotalHr2Night(aWhere).getHourInMinutes()
+        + dbh.getTotalHrDualDay(aWhere).getHourInMinutes() + dbh.getTotalHrDualNight(aWhere).getHourInMinutes();
         tvGrandTotal.setText(new HourCalculator(tempPlace).getMinutesInHour());
     }
 
