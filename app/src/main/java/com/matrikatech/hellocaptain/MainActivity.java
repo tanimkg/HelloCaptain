@@ -27,6 +27,12 @@ import com.matrikatech.hellocaptain.helpers.StringUtils;
 
 import java.util.Calendar;
 
+//Ad related imports
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
@@ -45,6 +51,23 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         init();
+
+        processAd();
+    }
+
+    private void processAd() {
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        // Request for Ads
+        AdRequest adRequest = new AdRequest.Builder()
+
+                // Add a test device to show Test Ads
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("1B849387B1B800D5689DDBB33558388B")
+                .build();
+        mAdView.loadAd(adRequest);
+
+
     }
 
     private void init() {

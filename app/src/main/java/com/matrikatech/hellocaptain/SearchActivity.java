@@ -105,6 +105,15 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.btnReset:
                 //reset fields
+                etSearchAc.setText("");
+                etSearchFirstPilot.setText("");
+                etSearchSecondPilot.setText("");
+                etSearchFromDt.setText("");
+                etSearchToDt.setText("");
+                etSearchMsn.setText("");
+                cbSearchIsMulti.setChecked(false);
+                cbSearchIsRotor.setChecked(false);
+                cbSearchIsNight.setChecked(false);
 
                 break;
             case R.id.btnSearch:
@@ -122,7 +131,6 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
                 search.putExtra("night", cbSearchIsNight.isChecked() ? true : false);
 
                 startActivity(search);
-
                 break;
         }
     }
