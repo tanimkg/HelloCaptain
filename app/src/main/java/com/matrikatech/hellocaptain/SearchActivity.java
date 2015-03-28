@@ -16,8 +16,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.matrikatech.hellocaptain.helpers.DatabaseHelper;
 
 import java.util.Calendar;
@@ -30,6 +33,9 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
     private CheckBox cbSearchIsNight, cbSearchIsMulti, cbSearchIsRotor;
     private Button btnSearch, btnReset;
 
+    private AdView adView;
+    private LinearLayout adLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +43,7 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
 
         findViews();
         setListeners();
+        processAd();
     }
 
     private void setListeners() {
@@ -151,6 +158,41 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
         }
     }
 
+    private void processAd() {
+
+        adLayout = (LinearLayout) findViewById(R.id.adLayout);
+
+        AdView adView = new AdView(this);
+        adView.setAdUnitId(MainActivity.AD_UNIT_ID);
+        adView.setAdSize(com.google.android.gms.ads.AdSize.BANNER);
+
+        //add adview to layout
+        adLayout.addView(adView);
+        // Request for Ads
+
+        adView.loadAd(new AdRequest.Builder().build());
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adView != null) {
+            adView.resume();
+        }
+    }
+
+    /*
+    * To stop loading/refreshing add when the activity is closed
+    * */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (adView != null) {
+            adView.pause();
+        }
+    }
 
     @SuppressLint("ValidFragment")
     public class FromDatePicker extends DialogFragment implements DatePickerDialog.OnDateSetListener {

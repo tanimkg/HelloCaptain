@@ -83,14 +83,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public HourCalculator getTotalHr1Day(WhereSQLBuilder where){
-        if (where != null) { where.setNight(false); }
+    public HourCalculator getTotalHr1Day(WhereSQLBuilder where) {
+        if (where != null) {
+            where.setNight(false);
+        }
         String query = "SELECT SUM(hr_1) AS total_hr1_day FROM " + MAIN_TABLE
                 + (where == null ? " WHERE night=0" : where.toString());
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(query, null);
-        if (c.moveToFirst())
-        {
+        if (c.moveToFirst()) {
             HourCalculator total = new HourCalculator(c.getInt(c.getColumnIndex("total_hr1_day")));
             db.close();
             return total;
@@ -98,15 +99,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public HourCalculator getTotalHr1Night(WhereSQLBuilder where){
-        if (where != null) { where.setNight(true); }
+    public HourCalculator getTotalHr1Night(WhereSQLBuilder where) {
+        if (where != null) {
+            where.setNight(true);
+        }
         String query = "SELECT SUM(hr_1) AS total_hr1_night FROM " + MAIN_TABLE
-                + (where == null ? " WHERE night=1" : where.toString())
-                ;
+                + (where == null ? " WHERE night=1" : where.toString());
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(query, null);
-        if (c.moveToFirst())
-        {
+        if (c.moveToFirst()) {
             HourCalculator total = new HourCalculator(c.getInt(c.getColumnIndex("total_hr1_night")));
             db.close();
             return total;
@@ -114,14 +115,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public HourCalculator getTotalHr2Day(WhereSQLBuilder where){
-        if (where != null) { where.setNight(false); }
+    public HourCalculator getTotalHr2Day(WhereSQLBuilder where) {
+        if (where != null) {
+            where.setNight(false);
+        }
         String query = "SELECT SUM(hr_2) AS total_hr2_day FROM " + MAIN_TABLE
                 + (where == null ? " WHERE night=0 " : where.toString());
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(query, null);
-        if (c.moveToFirst())
-        {
+        if (c.moveToFirst()) {
             HourCalculator total = new HourCalculator(c.getInt(c.getColumnIndex("total_hr2_day")));
             db.close();
             return total;
@@ -129,14 +131,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public HourCalculator getTotalHr2Night(WhereSQLBuilder where){
-        if (where != null) { where.setNight(true); }
+    public HourCalculator getTotalHr2Night(WhereSQLBuilder where) {
+        if (where != null) {
+            where.setNight(true);
+        }
         String query = "SELECT SUM(hr_2) AS total_hr2_night FROM " + MAIN_TABLE
                 + (where == null ? " WHERE night=1 " : where.toString());
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(query, null);
-        if (c.moveToFirst())
-        {
+        if (c.moveToFirst()) {
             HourCalculator total = new HourCalculator(c.getInt(c.getColumnIndex("total_hr2_night")));
             db.close();
             return total;
@@ -144,14 +147,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public HourCalculator getTotalHrDualDay(WhereSQLBuilder where){
-        if (where != null) { where.setNight(false); }
+    public HourCalculator getTotalHrDualDay(WhereSQLBuilder where) {
+        if (where != null) {
+            where.setNight(false);
+        }
         String query = "SELECT SUM(hr_dual) AS total_hrdual_day FROM " + MAIN_TABLE
-                + (where == null ? " WHERE night=0 ": where.toString());
+                + (where == null ? " WHERE night=0 " : where.toString());
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(query, null);
-        if (c.moveToFirst())
-        {
+        if (c.moveToFirst()) {
             HourCalculator total = new HourCalculator(c.getInt(c.getColumnIndex("total_hrdual_day")));
             db.close();
             return total;
@@ -159,14 +163,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public HourCalculator getTotalHrDualNight(WhereSQLBuilder where){
-        if (where != null) { where.setNight(true); }
+    public HourCalculator getTotalHrDualNight(WhereSQLBuilder where) {
+        if (where != null) {
+            where.setNight(true);
+        }
         String query = "SELECT SUM(hr_dual) AS total_hrdual_night FROM " + MAIN_TABLE
                 + (where == null ? " WHERE night=1" : where.toString());
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(query, null);
-        if (c.moveToFirst())
-        {
+        if (c.moveToFirst()) {
             HourCalculator total = new HourCalculator(c.getInt(c.getColumnIndex("total_hrdual_night")));
             db.close();
             return total;
@@ -174,13 +179,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public HourCalculator getTotalActHr(WhereSQLBuilder where){
+    public HourCalculator getTotalActHr(WhereSQLBuilder where) {
         String query = "SELECT SUM(act_hr) AS total_act_hr FROM " + MAIN_TABLE
                 + (where == null ? "" : where.toString());
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(query, null);
-        if (c.moveToFirst())
-        {
+        if (c.moveToFirst()) {
             HourCalculator total = new HourCalculator(c.getInt(c.getColumnIndex("total_act_hr")));
             db.close();
             return total;
@@ -188,14 +192,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public HourCalculator getTotalSimHr(WhereSQLBuilder where){
+    public HourCalculator getTotalSimHr(WhereSQLBuilder where) {
         String query = "SELECT SUM(sim_hr) AS total_sim_hr FROM " + MAIN_TABLE
-                + (where == null ? "" : where.toString())
-                ;
+                + (where == null ? "" : where.toString());
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(query, null);
-        if (c.moveToFirst())
-        {
+        if (c.moveToFirst()) {
             HourCalculator total = new HourCalculator(c.getInt(c.getColumnIndex("total_sim_hr")));
             db.close();
             return total;
@@ -217,6 +219,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()) {  //if there ARE records inside cursor
             do {
                 FlightLog fl = new FlightLog();
+                fl.setId(c.getLong(c.getColumnIndex("id")));
                 fl.setMission(c.getString(c.getColumnIndex("mission")));
                 fl.setRoute(c.getString(c.getColumnIndex("route")));
                 //fl.setDescription(c.getString(c.getColumnIndex("description")));
@@ -230,7 +233,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 //Aircraft
                 Aircraft ac = new Aircraft();
-                boolean isRotor = c.getInt(c.getColumnIndex("rotor")) == 1 ? true:false;
+                boolean isRotor = c.getInt(c.getColumnIndex("rotor")) == 1 ? true : false;
                 boolean isMulti = (c.getInt(c.getColumnIndex("multi_eng")) == 1 ? true : false);
                 ac.setName(c.getString(c.getColumnIndex("ac_name")));
                 ac.setTailNo(c.getString(c.getColumnIndex("ac_num")));
@@ -270,6 +273,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()) {  //if there ARE records inside curson
             do {
                 FlightLog fl = new FlightLog();
+                fl.setId(c.getLong(c.getColumnIndex("id")));
                 fl.setMission(c.getString(c.getColumnIndex("mission")));
                 fl.setRoute(c.getString(c.getColumnIndex("route")));
                 //fl.setDescription(c.getString(c.getColumnIndex("description")));
@@ -283,8 +287,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 //Aircraft
                 Aircraft ac = new Aircraft();
-                    boolean isRotor = c.getInt(c.getColumnIndex("rotor")) == 1 ? true:false;
-                    boolean isMulti = (c.getInt(c.getColumnIndex("multi_eng")) == 1 ? true : false);
+                boolean isRotor = c.getInt(c.getColumnIndex("rotor")) == 1 ? true : false;
+                boolean isMulti = (c.getInt(c.getColumnIndex("multi_eng")) == 1 ? true : false);
                 ac.setName(c.getString(c.getColumnIndex("ac_name")));
                 ac.setTailNo(c.getString(c.getColumnIndex("ac_num")));
                 ac.setMultiEng(isMulti);
@@ -311,18 +315,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public void deleteRecord(FlightLog aRecord)
-    {
-        long id = aRecord.getId();
+    public void deleteRecord(long id) {
         SQLiteDatabase db = super.getWritableDatabase();
 
         //TODO Incomplete
-        db.delete(MAIN_TABLE, "id='"+id+"'", null);
+//        db.delete(MAIN_TABLE, "id=" + id, null);
+        String qry = "DELETE FROM " + MAIN_TABLE + " WHERE id='" + id + "'";
+        db.execSQL(qry);
         db.close();
     }
 
 
-    public ArrayList<String> getPilotNames(){
+    public ArrayList<String> getPilotNames() {
         ArrayList<String> pilotNames = new ArrayList<String>();
         String queryStr = "SELECT DISTINCT pilot_1 FROM " + MAIN_TABLE;
 
@@ -340,7 +344,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return pilotNames;
     }
 
-    public ArrayList<String> getAcNames(){
+    public ArrayList<String> getAcNames() {
         ArrayList<String> acNames = new ArrayList<String>();
         String queryStr = "SELECT DISTINCT ac_name FROM " + MAIN_TABLE;
 
@@ -358,7 +362,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return acNames;
     }
 
-    public ArrayList<String> getTailNos(){
+    public ArrayList<String> getTailNos() {
         ArrayList<String> tailNos = new ArrayList<String>();
         String queryStr = "SELECT DISTINCT ac_num FROM " + MAIN_TABLE;
 

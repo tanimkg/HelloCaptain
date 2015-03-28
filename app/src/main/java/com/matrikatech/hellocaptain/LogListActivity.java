@@ -3,15 +3,17 @@ package com.matrikatech.hellocaptain;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.internal.widget.AdapterViewCompat;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.matrikatech.hellocaptain.helpers.DatabaseHelper;
 import com.matrikatech.hellocaptain.helpers.FlightLog;
 import com.matrikatech.hellocaptain.helpers.HourCalculator;
@@ -24,6 +26,10 @@ public class LogListActivity extends ActionBarActivity implements AdapterView.On
 
     ListView lvLogs;
     List<FlightLog> logProvider;
+    LogAdapter adapter;
+
+    private AdView adView;
+    private LinearLayout adLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +37,12 @@ public class LogListActivity extends ActionBarActivity implements AdapterView.On
         setContentView(R.layout.activity_log_list);
 
         fetchAllRecords();
+        processAd();
     }
 
     private void fetchAllRecords() {
         // 1. pass context and data to the custom adapter
-        final LogAdapter adapter = new LogAdapter(getApplicationContext(), getData());
+        adapter = new LogAdapter(getApplicationContext(), getData());
 
         // 2. Get ListView
         lvLogs = (ListView) findViewById(R.id.lvLogs);
@@ -93,10 +100,10 @@ public class LogListActivity extends ActionBarActivity implements AdapterView.On
         despatch.putExtra("firstPilot", dLog.getFirstPilot().getName());
         despatch.putExtra("secondPilot", dLog.getSecondPilot().getName());
         despatch.putExtra("ac", dLog.getAc().getName());
-        despatch.putExtra("isMulti", (dLog.getAc().isMultiEng() == 1 ? "Yes":"No"));
-        despatch.putExtra("isRotor", (dLog.getAc().isRotor() == 1 ? "Yes":"No"));
-        despatch.putExtra("msn", dLog.getMission() + (dLog.isNight()==1?"(Night)":""));
-        despatch.putExtra("isNight", dLog.isNight()==1?true:false);
+        despatch.putExtra("isMulti", (dLog.getAc().isMultiEng() == 1 ? "Yes" : "No"));
+        despatch.putExtra("isRotor", (dLog.getAc().isRotor() == 1 ? "Yes" : "No"));
+        despatch.putExtra("msn", dLog.getMission() + (dLog.isNight() == 1 ? "(Night)" : ""));
+        despatch.putExtra("isNight", dLog.isNight() == 1 ? true : false);
         despatch.putExtra("dt", dLog.getDt());
         despatch.putExtra("route", dLog.getRoute());
         despatch.putExtra("tail", dLog.getAc().getTailNo());
@@ -135,13 +142,56 @@ public class LogListActivity extends ActionBarActivity implements AdapterView.On
 
     private void editRecord(int position) {
         FlightLog dLog = logProvider.get(position);
-
+        //TODO implement edit
+        //send extras to edit activity and arrange update
     }
 
     private void deleteRecord(int position) {
-        FlightLog dLog = logProvider.get(position);
+        long id = logProvider.get(position).getId();
 
         DatabaseHelper dbh = new DatabaseHelper(getApplicationContext());
-        dbh.deleteRecord(dLog);
+        dbh.deleteRecord(id);
+
+        //refresh list
+        logProvider.remove(position);
+        adapter.notifyDataSetChanged();
+
+    }
+
+    private void processAd() {
+
+        adLayout = (LinearLayout) findViewById(R.id.adLayout);
+
+        AdView adView = new AdView(this);
+        adView.setAdUnitId(MainActivity.AD_UNIT_ID);
+        adView.setAdSize(com.google.android.gms.ads.AdSize.BANNER);
+
+        //add adview to layout
+        adLayout.addView(adView);
+        // Request for Ads
+
+        adView.loadAd(new AdRequest.Builder().build());
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adView != null) {
+            adView.resume();
+        }
+    }
+
+
+    /*
+    * To stop loading/refreshing add when the activity is closed
+    * */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (adView != null) {
+            adView.pause();
+        }
     }
 }

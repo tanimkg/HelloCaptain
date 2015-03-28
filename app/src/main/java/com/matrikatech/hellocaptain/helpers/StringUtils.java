@@ -5,8 +5,7 @@ package com.matrikatech.hellocaptain.helpers;
  */
 public class StringUtils {
 
-    public String getNullSafeString(String text)
-    {
+    public String getNullSafeString(String text) {
         return text == null ? "" : text;
     }
 }

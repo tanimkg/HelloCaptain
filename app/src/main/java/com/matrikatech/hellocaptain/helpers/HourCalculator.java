@@ -17,7 +17,7 @@ public class HourCalculator {
 
     public HourCalculator(int total) {
         this.hourInMinutes = total;
-        this.h = (int) Math.floor(total/60);
+        this.h = (int) Math.floor(total / 60);
         this.m = (int) total % 60;
 
     }
@@ -37,15 +37,13 @@ public class HourCalculator {
     public String getMinutesInHour() {
         //TODO Format hh:mm correctly. Now 07:05 shows 7:5
         String hhmm = "";
-        if (this.getH() < 10)
-        {
+        if (this.getH() < 10) {
             hhmm += "0" + this.getH();
         } else {
             hhmm += String.valueOf(this.getH());
         }
         hhmm += ":";
-        if (this.getM() < 10)
-        {
+        if (this.getM() < 10) {
             hhmm += "0" + this.getM();
         } else {
             hhmm += String.valueOf(this.getM());

@@ -18,23 +18,48 @@ public class MyDateUtils {
     public static final int NOV = 11;
     public static final int DEC = 12;
 
-    public String getMonthNameFromNo (int monthNo)
-    {
+    public String getMonthNameFromNo(int monthNo) {
         String retStr;
         switch (monthNo) {
-            case JAN: retStr = "Jan"; break;
-            case FEB: retStr = "Feb"; break;
-            case MAR: retStr = "Mar"; break;
-            case APR: retStr = "Apr"; break;
-            case MAY: retStr = "May"; break;
-            case JUN: retStr = "Jun"; break;
-            case JUL: retStr = "Jul"; break;
-            case AUG: retStr = "Aug"; break;
-            case SEP: retStr = "Sep"; break;
-            case OCT: retStr = "Oct"; break;
-            case NOV: retStr = "Nov"; break;
-            case DEC: retStr = "Dec"; break;
-            default: retStr = null; break;
+            case JAN:
+                retStr = "Jan";
+                break;
+            case FEB:
+                retStr = "Feb";
+                break;
+            case MAR:
+                retStr = "Mar";
+                break;
+            case APR:
+                retStr = "Apr";
+                break;
+            case MAY:
+                retStr = "May";
+                break;
+            case JUN:
+                retStr = "Jun";
+                break;
+            case JUL:
+                retStr = "Jul";
+                break;
+            case AUG:
+                retStr = "Aug";
+                break;
+            case SEP:
+                retStr = "Sep";
+                break;
+            case OCT:
+                retStr = "Oct";
+                break;
+            case NOV:
+                retStr = "Nov";
+                break;
+            case DEC:
+                retStr = "Dec";
+                break;
+            default:
+                retStr = null;
+                break;
         }
 
         return retStr;

@@ -16,9 +16,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.matrikatech.hellocaptain.helpers.Aircraft;
 import com.matrikatech.hellocaptain.helpers.DatabaseHelper;
 import com.matrikatech.hellocaptain.helpers.FlightLog;
@@ -30,13 +32,9 @@ import java.util.Calendar;
 
 //Ad related imports
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
-
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
+    public static final String AD_UNIT_ID = "ca-app-pub-4030334335580782/3736718756";
     private EditText etDate, etMission, etRoute,
             etHr1, etMin1,
             etHr2, etMin2, etHrDual, etMinDual, etActHr,
@@ -44,8 +42,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private AutoCompleteTextView etFirstPilot, etSecondPilot, etAcName, etTailNo;
     private CheckBox cbNight, cbMultiEng, cbRotary;
     private Button btnSave;
-    private TextView tvDual;
-//TODO: Auto complete text view implementations
+    private AdView adView;
+    private LinearLayout adLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,22 +57,24 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     private void processAd() {
 
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        // Request for Ads
-        AdRequest adRequest = new AdRequest.Builder()
+        adLayout = (LinearLayout) findViewById(R.id.adLayout);
 
-                // Add a test device to show Test Ads
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("1B849387B1B800D5689DDBB33558388B")
-                .build();
-        mAdView.loadAd(adRequest);
+        AdView adView = new AdView(MainActivity.this);
+        adView.setAdUnitId(AD_UNIT_ID);
+        adView.setAdSize(com.google.android.gms.ads.AdSize.BANNER);
+
+        //add adview to layout
+        adLayout.addView(adView);
+        // Request for Ads
+
+        adView.loadAd(new AdRequest.Builder().build());
 
 
     }
 
     private void init() {
 
-       // TEMP CODE
+        // TEMP CODE
 //        Intent stats = new Intent(MainActivity.this, SearchActivity.class);
 //        startActivity(stats);
 
@@ -97,7 +98,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 android.R.layout.simple_spinner_dropdown_item,
                 new DatabaseHelper(getApplicationContext()).getTailNos());
         etTailNo.setAdapter(tailNosAdapter);
-
 
 
         //implement datepicker
@@ -265,6 +265,24 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adView != null) {
+            adView.resume();
+        }
+    }
+
+    /*
+    * To stop loading/refreshing add when the activity is closed
+    * */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (adView != null) {
+            adView.pause();
+        }
+    }
 
     @SuppressLint("ValidFragment")
     public class MyDatePicker extends DialogFragment implements DatePickerDialog.OnDateSetListener {

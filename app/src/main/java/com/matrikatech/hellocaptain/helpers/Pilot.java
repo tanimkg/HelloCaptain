@@ -19,8 +19,7 @@ public class Pilot {
     }
 
     public String getName() {
-        if (rank == null)
-        {
+        if (rank == null) {
             return name;
         }
         return rank + " " + name;

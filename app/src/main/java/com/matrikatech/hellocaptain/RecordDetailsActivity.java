@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 
 public class RecordDetailsActivity extends ActionBarActivity {
@@ -26,6 +30,9 @@ public class RecordDetailsActivity extends ActionBarActivity {
             tvDetailsActHr,
             tvDetailsSimHr;
 
+    private AdView adView;
+    private LinearLayout adLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +40,7 @@ public class RecordDetailsActivity extends ActionBarActivity {
 
         findViewsByIds();
         getIntentExtras();
-
+        processAd();
     }
 
     private void getIntentExtras() {
@@ -111,5 +118,43 @@ public class RecordDetailsActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private void processAd() {
+
+        adLayout = (LinearLayout) findViewById(R.id.adLayout);
+
+        AdView adView = new AdView(this);
+        adView.setAdUnitId(MainActivity.AD_UNIT_ID);
+        adView.setAdSize(com.google.android.gms.ads.AdSize.BANNER);
+
+        //add adview to layout
+        adLayout.addView(adView);
+        // Request for Ads
+
+        adView.loadAd(new AdRequest.Builder().build());
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adView != null) {
+            adView.resume();
+        }
+    }
+
+
+    /*
+    * To stop loading/refreshing add when the activity is closed
+    * */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (adView != null) {
+            adView.pause();
+        }
     }
 }

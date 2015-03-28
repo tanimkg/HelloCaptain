@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.matrikatech.hellocaptain.helpers.DatabaseHelper;
 import com.matrikatech.hellocaptain.helpers.HourCalculator;
 
@@ -18,6 +21,9 @@ public class StatActivity extends ActionBarActivity {
             tvTotalHrDualDay, tvTotalHrDualNight, tvTotalHrDual,
             tvTotalActHr, tvTotalSimHr, tvGrandTotal;
 
+    private AdView adView;
+    private LinearLayout adLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,20 +32,21 @@ public class StatActivity extends ActionBarActivity {
 
         findViewsByIds();
         setTexts();
+        processAd();
     }
 
     private void setTexts() {
 
         DatabaseHelper dbh = new DatabaseHelper(getApplicationContext());
-            HourCalculator thr1 = new HourCalculator(dbh.getTotalHr1Day(null).getHourInMinutes() + dbh.getTotalHr1Night(null).getHourInMinutes());
+        HourCalculator thr1 = new HourCalculator(dbh.getTotalHr1Day(null).getHourInMinutes() + dbh.getTotalHr1Night(null).getHourInMinutes());
         tvTotalHr1.setText(thr1.getMinutesInHour());
         tvTotalHr1Day.setText(dbh.getTotalHr1Day(null).getMinutesInHour());
         tvTotalHr1Night.setText(dbh.getTotalHr1Night(null).getMinutesInHour());
-            HourCalculator thr2 = new HourCalculator(dbh.getTotalHr2Day(null).getHourInMinutes() + dbh.getTotalHr2Night(null).getHourInMinutes());
+        HourCalculator thr2 = new HourCalculator(dbh.getTotalHr2Day(null).getHourInMinutes() + dbh.getTotalHr2Night(null).getHourInMinutes());
         tvTotalHr2.setText(thr2.getMinutesInHour());
         tvTotalHr2Day.setText(dbh.getTotalHr2Day(null).getMinutesInHour());
         tvTotalHr2Night.setText(dbh.getTotalHr2Night(null).getMinutesInHour());
-            HourCalculator thrDual = new HourCalculator(dbh.getTotalHrDualDay(null).getHourInMinutes() + dbh.getTotalHrDualNight(null).getHourInMinutes());
+        HourCalculator thrDual = new HourCalculator(dbh.getTotalHrDualDay(null).getHourInMinutes() + dbh.getTotalHrDualNight(null).getHourInMinutes());
         tvTotalHrDual.setText(thrDual.getMinutesInHour());
         tvTotalHrDualDay.setText(dbh.getTotalHrDualDay(null).getMinutesInHour());
         tvTotalHrDualNight.setText(dbh.getTotalHrDualNight(null).getMinutesInHour());
@@ -53,21 +60,58 @@ public class StatActivity extends ActionBarActivity {
     }
 
     private void findViewsByIds() {
-        tvTotalActHr        = (TextView) findViewById(R.id.tvTotalActHr);
-        tvTotalSimHr        = (TextView) findViewById(R.id.tvTotalSimHr);
-        tvTotalHr1          = (TextView) findViewById(R.id.tvTotalHr1);
-        tvTotalHr1Day       = (TextView) findViewById(R.id.tvTotalHr1Day);
-        tvTotalHr1Night     = (TextView) findViewById(R.id.tvTotalHr1Night);
-        tvTotalHr2          = (TextView) findViewById(R.id.tvTotalHr2);
-        tvTotalHr2Day       = (TextView) findViewById(R.id.tvTotalHr2Day);
-        tvTotalHr2Night     = (TextView) findViewById(R.id.tvTotalHr2Night);
-        tvTotalHrDual       = (TextView) findViewById(R.id.tvTotalHrDual);
-        tvTotalHrDualDay    = (TextView) findViewById(R.id.tvTotalHrDualDay);
-        tvTotalHrDualNight  = (TextView) findViewById(R.id.tvTotalHrDualNight);
+        tvTotalActHr = (TextView) findViewById(R.id.tvTotalActHr);
+        tvTotalSimHr = (TextView) findViewById(R.id.tvTotalSimHr);
+        tvTotalHr1 = (TextView) findViewById(R.id.tvTotalHr1);
+        tvTotalHr1Day = (TextView) findViewById(R.id.tvTotalHr1Day);
+        tvTotalHr1Night = (TextView) findViewById(R.id.tvTotalHr1Night);
+        tvTotalHr2 = (TextView) findViewById(R.id.tvTotalHr2);
+        tvTotalHr2Day = (TextView) findViewById(R.id.tvTotalHr2Day);
+        tvTotalHr2Night = (TextView) findViewById(R.id.tvTotalHr2Night);
+        tvTotalHrDual = (TextView) findViewById(R.id.tvTotalHrDual);
+        tvTotalHrDualDay = (TextView) findViewById(R.id.tvTotalHrDualDay);
+        tvTotalHrDualNight = (TextView) findViewById(R.id.tvTotalHrDualNight);
 
-        tvGrandTotal        = (TextView) findViewById(R.id.tvGrandTotal);
+        tvGrandTotal = (TextView) findViewById(R.id.tvGrandTotal);
     }
 
+
+    private void processAd() {
+
+        adLayout = (LinearLayout) findViewById(R.id.adLayout);
+
+        AdView adView = new AdView(this);
+        adView.setAdUnitId(MainActivity.AD_UNIT_ID);
+        adView.setAdSize(com.google.android.gms.ads.AdSize.BANNER);
+
+        //add adview to layout
+        adLayout.addView(adView);
+        // Request for Ads
+
+        adView.loadAd(new AdRequest.Builder().build());
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adView != null) {
+            adView.resume();
+        }
+    }
+
+
+    /*
+    * To stop loading/refreshing add when the activity is closed
+    * */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (adView != null) {
+            adView.pause();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

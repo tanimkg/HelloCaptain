@@ -83,8 +83,7 @@ public class LogAdapter extends ArrayAdapter<FlightLog> {
     }
 
     //VERY IMPORTANT! Use this viewholder strategy for professional app development
-    static class ViewHolder
-    {
+    static class ViewHolder {
         public TextView tvRowDtD;
         public TextView tvRowDtM;
         public TextView tvRowDtY;

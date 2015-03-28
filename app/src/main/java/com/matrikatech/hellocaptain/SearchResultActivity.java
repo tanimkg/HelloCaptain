@@ -1,15 +1,18 @@
 package com.matrikatech.hellocaptain;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.matrikatech.hellocaptain.helpers.DatabaseHelper;
 import com.matrikatech.hellocaptain.helpers.FlightLog;
 import com.matrikatech.hellocaptain.helpers.HourCalculator;
@@ -30,6 +33,9 @@ public class SearchResultActivity extends ActionBarActivity implements AdapterVi
             tvTotalHrDualDay, tvTotalHrDualNight, tvTotalHrDual,
             tvTotalActHr, tvTotalSimHr, tvGrandTotal;
 
+    private AdView adView;
+    private LinearLayout adLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,7 @@ public class SearchResultActivity extends ActionBarActivity implements AdapterVi
         getWhereSQLfromIntentExtras();
         fetchSearchResults();
         setTexts();
+        processAd();
     }
 
 
@@ -65,7 +72,7 @@ public class SearchResultActivity extends ActionBarActivity implements AdapterVi
     }
 
 
-    private WhereSQLBuilder getWhereSQLfromIntentExtras(){
+    private WhereSQLBuilder getWhereSQLfromIntentExtras() {
         //get params via intent extras and pass through
         Intent recParams = getIntent();
         String firstPilot = recParams.getStringExtra("firstPilot");
@@ -93,19 +100,19 @@ public class SearchResultActivity extends ActionBarActivity implements AdapterVi
     }
 
     private void findViewsByIds() {
-        tvTotalActHr        = (TextView) findViewById(R.id.tvTotalActHr);
-        tvTotalSimHr        = (TextView) findViewById(R.id.tvTotalSimHr);
-        tvTotalHr1          = (TextView) findViewById(R.id.tvTotalHr1);
-        tvTotalHr1Day       = (TextView) findViewById(R.id.tvTotalHr1Day);
-        tvTotalHr1Night     = (TextView) findViewById(R.id.tvTotalHr1Night);
-        tvTotalHr2          = (TextView) findViewById(R.id.tvTotalHr2);
-        tvTotalHr2Day       = (TextView) findViewById(R.id.tvTotalHr2Day);
-        tvTotalHr2Night     = (TextView) findViewById(R.id.tvTotalHr2Night);
-        tvTotalHrDual       = (TextView) findViewById(R.id.tvTotalHrDual);
-        tvTotalHrDualDay    = (TextView) findViewById(R.id.tvTotalHrDualDay);
-        tvTotalHrDualNight  = (TextView) findViewById(R.id.tvTotalHrDualNight);
+        tvTotalActHr = (TextView) findViewById(R.id.tvTotalActHr);
+        tvTotalSimHr = (TextView) findViewById(R.id.tvTotalSimHr);
+        tvTotalHr1 = (TextView) findViewById(R.id.tvTotalHr1);
+        tvTotalHr1Day = (TextView) findViewById(R.id.tvTotalHr1Day);
+        tvTotalHr1Night = (TextView) findViewById(R.id.tvTotalHr1Night);
+        tvTotalHr2 = (TextView) findViewById(R.id.tvTotalHr2);
+        tvTotalHr2Day = (TextView) findViewById(R.id.tvTotalHr2Day);
+        tvTotalHr2Night = (TextView) findViewById(R.id.tvTotalHr2Night);
+        tvTotalHrDual = (TextView) findViewById(R.id.tvTotalHrDual);
+        tvTotalHrDualDay = (TextView) findViewById(R.id.tvTotalHrDualDay);
+        tvTotalHrDualNight = (TextView) findViewById(R.id.tvTotalHrDualNight);
 
-        tvGrandTotal        = (TextView) findViewById(R.id.tvGrandTotal);
+        tvGrandTotal = (TextView) findViewById(R.id.tvGrandTotal);
     }
 
     private void setTexts() {
@@ -127,11 +134,48 @@ public class SearchResultActivity extends ActionBarActivity implements AdapterVi
         tvTotalSimHr.setText(dbh.getTotalSimHr(aWhere).getMinutesInHour());
 
         int tempPlace = dbh.getTotalHr1Day(aWhere).getHourInMinutes() + dbh.getTotalHr1Night(aWhere).getHourInMinutes()
-        + dbh.getTotalHr2Day(aWhere).getHourInMinutes() + dbh.getTotalHr2Night(aWhere).getHourInMinutes()
-        + dbh.getTotalHrDualDay(aWhere).getHourInMinutes() + dbh.getTotalHrDualNight(aWhere).getHourInMinutes();
+                + dbh.getTotalHr2Day(aWhere).getHourInMinutes() + dbh.getTotalHr2Night(aWhere).getHourInMinutes()
+                + dbh.getTotalHrDualDay(aWhere).getHourInMinutes() + dbh.getTotalHrDualNight(aWhere).getHourInMinutes();
         tvGrandTotal.setText(new HourCalculator(tempPlace).getMinutesInHour());
     }
 
+
+    private void processAd() {
+
+        adLayout = (LinearLayout) findViewById(R.id.adLayout);
+
+        AdView adView = new AdView(this);
+        adView.setAdUnitId(MainActivity.AD_UNIT_ID);
+        adView.setAdSize(com.google.android.gms.ads.AdSize.BANNER);
+
+        //add adview to layout
+        adLayout.addView(adView);
+        // Request for Ads
+
+        adView.loadAd(new AdRequest.Builder().build());
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adView != null) {
+            adView.resume();
+        }
+    }
+
+
+    /*
+    * To stop loading/refreshing add when the activity is closed
+    * */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (adView != null) {
+            adView.pause();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -164,10 +208,10 @@ public class SearchResultActivity extends ActionBarActivity implements AdapterVi
         despatch.putExtra("firstPilot", dLog.getFirstPilot().getName());
         despatch.putExtra("secondPilot", dLog.getSecondPilot().getName());
         despatch.putExtra("ac", dLog.getAc().getName());
-        despatch.putExtra("isMulti", (dLog.getAc().isMultiEng() == 1 ? "Yes":"No"));
-        despatch.putExtra("isRotor", (dLog.getAc().isRotor() == 1 ? "Yes":"No"));
-        despatch.putExtra("msn", dLog.getMission() + (dLog.isNight()==1?"(Night)":""));
-        despatch.putExtra("isNight", dLog.isNight()==1?true:false);
+        despatch.putExtra("isMulti", (dLog.getAc().isMultiEng() == 1 ? "Yes" : "No"));
+        despatch.putExtra("isRotor", (dLog.getAc().isRotor() == 1 ? "Yes" : "No"));
+        despatch.putExtra("msn", dLog.getMission() + (dLog.isNight() == 1 ? "(Night)" : ""));
+        despatch.putExtra("isNight", dLog.isNight() == 1 ? true : false);
         despatch.putExtra("dt", dLog.getDt());
         despatch.putExtra("route", dLog.getRoute());
         despatch.putExtra("tail", dLog.getAc().getTailNo());

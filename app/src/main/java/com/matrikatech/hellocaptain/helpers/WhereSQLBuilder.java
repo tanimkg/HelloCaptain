@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 
 /**
  * Created by TANIM on 23-Mar-15.
- *
+ * <p/>
  * Returns a SQL string containing only where clauses
  */
 public class WhereSQLBuilder {
@@ -29,8 +29,7 @@ public class WhereSQLBuilder {
     }
 
     public void setToDt(String toDt) {
-        if ((fromDt != null) && (toDt == null))
-        {
+        if ((fromDt != null) && (toDt == null)) {
             SimpleDateFormat dt = new SimpleDateFormat("yyyy-M-dd");
             this.toDt = dt.toString();
         } else {
@@ -47,11 +46,11 @@ public class WhereSQLBuilder {
     }
 
     public void setRotor(boolean rotor) {
-        this.rotor = rotor ? 1:0;
+        this.rotor = rotor ? 1 : 0;
     }
 
     public void setMulti(boolean multi) {
-        this.multi = multi ? 1:0;
+        this.multi = multi ? 1 : 0;
     }
 
     @Override
@@ -73,7 +72,9 @@ public class WhereSQLBuilder {
         queryStr += (night == 0 ? "" : " night=1 AND ");
         if ((!fd.isEmpty()) && (!td.isEmpty())) {
             queryStr += " (dt BETWEEN '" + fd + "' AND '" + td + "') AND ";
-        } else { queryStr += ""; }
+        } else {
+            queryStr += "";
+        }
         queryStr += " id != 0 ";
         queryStr += " ORDER BY dt";
 

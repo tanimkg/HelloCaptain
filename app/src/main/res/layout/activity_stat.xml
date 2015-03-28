@@ -9,6 +9,16 @@
     android:stretchColumns="*"
     tools:context="com.matrikatech.hellocaptain.StatActivity">
 
+
+    <LinearLayout
+        android:id="@+id/adLayout"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        ></LinearLayout>
+
+
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
