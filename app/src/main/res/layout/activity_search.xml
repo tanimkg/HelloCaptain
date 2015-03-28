@@ -37,21 +37,21 @@
 
                 <TextView android:text="First Pilot =" />
 
-                <AutoCompleteTextView android:id="@+id/etSearchFirstPilot" />
+                <AutoCompleteTextView android:id="@+id/etSearchFirstPilot" android:completionThreshold="2" />
             </TableRow>
 
             <TableRow>
 
                 <TextView android:text="Second Pilot =" />
 
-                <AutoCompleteTextView android:id="@+id/etSearchSecondPilot" />
+                <AutoCompleteTextView android:id="@+id/etSearchSecondPilot"  android:completionThreshold="2"/>
             </TableRow>
 
             <TableRow>
 
                 <TextView android:text="Aircraft =" />
 
-                <AutoCompleteTextView android:id="@+id/etSearchAc" />
+                <AutoCompleteTextView android:id="@+id/etSearchAc"  android:completionThreshold="1"/>
             </TableRow>
 
             <TableRow>

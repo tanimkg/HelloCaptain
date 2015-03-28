@@ -10,12 +10,15 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.matrikatech.hellocaptain.helpers.DatabaseHelper;
 
 import java.util.Calendar;
 
@@ -56,6 +59,19 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
             }
         });
 
+
+        ArrayAdapter<String> pilotNamesAdapter = new ArrayAdapter<String>(
+                getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                new DatabaseHelper(getApplicationContext()).getPilotNames());
+        etSearchFirstPilot.setAdapter(pilotNamesAdapter);
+        etSearchSecondPilot.setAdapter(pilotNamesAdapter);
+
+        ArrayAdapter<String> acNamesAdapter = new ArrayAdapter<String>(
+                getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                new DatabaseHelper(getApplicationContext()).getAcNames());
+        etSearchAc.setAdapter(acNamesAdapter);
 
     }
 

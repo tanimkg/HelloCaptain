@@ -321,4 +321,59 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+
+    public ArrayList<String> getPilotNames(){
+        ArrayList<String> pilotNames = new ArrayList<String>();
+        String queryStr = "SELECT DISTINCT pilot_1 FROM " + MAIN_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(queryStr, null);
+
+        //loop through all rows
+        if (c.moveToFirst()) {  //if there ARE records inside cursor
+            do {
+                String name = c.getString(c.getColumnIndex("pilot_1"));
+                pilotNames.add(name);
+            } while (c.moveToNext());
+        }
+        db.close();
+        return pilotNames;
+    }
+
+    public ArrayList<String> getAcNames(){
+        ArrayList<String> acNames = new ArrayList<String>();
+        String queryStr = "SELECT DISTINCT ac_name FROM " + MAIN_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(queryStr, null);
+
+        //loop through all rows
+        if (c.moveToFirst()) {  //if there ARE records inside cursor
+            do {
+                String name = c.getString(c.getColumnIndex("ac_name"));
+                acNames.add(name);
+            } while (c.moveToNext());
+        }
+        db.close();
+        return acNames;
+    }
+
+    public ArrayList<String> getTailNos(){
+        ArrayList<String> tailNos = new ArrayList<String>();
+        String queryStr = "SELECT DISTINCT ac_num FROM " + MAIN_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(queryStr, null);
+
+        //loop through all rows
+        if (c.moveToFirst()) {  //if there ARE records inside cursor
+            do {
+                String acNum = c.getString(c.getColumnIndex("ac_num"));
+                tailNos.add(acNum);
+            } while (c.moveToNext());
+        }
+        db.close();
+        return tailNos;
+    }
+
 }

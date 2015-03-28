@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -78,6 +79,26 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         findViewByIds();
         // Set listeners;
+        ArrayAdapter<String> pilotNamesAdapter = new ArrayAdapter<String>(
+                getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                new DatabaseHelper(getApplicationContext()).getPilotNames());
+        etFirstPilot.setAdapter(pilotNamesAdapter);
+        etSecondPilot.setAdapter(pilotNamesAdapter);
+
+        ArrayAdapter<String> acNamesAdapter = new ArrayAdapter<String>(
+                getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                new DatabaseHelper(getApplicationContext()).getAcNames());
+        etAcName.setAdapter(acNamesAdapter);
+
+        ArrayAdapter<String> tailNosAdapter = new ArrayAdapter<String>(
+                getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                new DatabaseHelper(getApplicationContext()).getTailNos());
+        etTailNo.setAdapter(tailNosAdapter);
+
+
 
         //implement datepicker
         /* MyDatePicker class is set
