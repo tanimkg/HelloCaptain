@@ -122,6 +122,7 @@ public class LogListActivity extends ActionBarActivity implements AdapterView.On
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.context_menu, menu);
+        //go to xml file for enabling edit menu
     }
 
     @Override
@@ -129,9 +130,9 @@ public class LogListActivity extends ActionBarActivity implements AdapterView.On
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 //        AdapterViewCompat.AdapterContextMenuInfo info = (AdapterViewCompat.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
-            case R.id.editRecord:
-                editRecord(info.position);
-                return true;
+//            case R.id.editRecord:
+//                editRecord(info.position);
+//                return true;
             case R.id.deleteRecord:
                 deleteRecord(info.position);
                 return true;
@@ -153,7 +154,7 @@ public class LogListActivity extends ActionBarActivity implements AdapterView.On
         dbh.deleteRecord(id);
 
         //refresh list
-        logProvider.remove(position);
+        logProvider.remove(position); //otherwise notifydata change doesn't work
         adapter.notifyDataSetChanged();
 
     }
